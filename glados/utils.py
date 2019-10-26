@@ -41,7 +41,6 @@ def plot_elements(data: np.ndarray, columns=10, rows=10) -> None:
     for i in range(columns * rows):
         plt.subplot(rows, columns, i + 1)
         plt.imshow(data[i], cmap='gray')
-    print('FINISHED SUBPLOTS')
     plt.show()
 
 
