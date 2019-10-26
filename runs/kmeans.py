@@ -22,13 +22,6 @@ from glados.utils import plot_elements, load_sign_language_digits_ds
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 fake_data = np.asarray([[1, 3], [1.5, 2.5], [1, 2], [3, 1], [3, 2]])
 
-
-# Kmeans on fake data
-#fake_lloyd_kmeans = LloydKmeans(fake_data / 3.0, y_train, 2)
-#fake_lloyd_kmeans.fit()
-#print({mk: np.asarray(mu.cluster_item)*3.0 for mk, mu in fake_lloyd_kmeans.mus.items()})
-
-
 # Kmeans run on MNIST
 mnist_lloyd_kmeans = LloydKmeans(np.reshape(x_train[0:50], (-1, 784)) / 255.0, y_train, 10)
 mnist_lloyd_kmeans.fit()
@@ -53,7 +46,6 @@ for item in mnist_lloyd_kmeans.mus:
 
 for j in range(len(centroids)):
     pts = []
-    #   barycentre.append([np.linalg.norm(centroids[0]), np.linalg.norm(centroids[1])])
     for item in items[j]:
         pts.append(
             [np.linalg.norm(item.coordinate - centroids[0]), np.linalg.norm(item.coordinate - centroids[1]), item.label,
@@ -75,19 +67,23 @@ for i in range(10):
     plt.legend(handles=l)
 plt.show()
 
-#mus_imgs = np.asarray([np.reshape(mu.representative.coordinate, (28, 28)) * 255.0 for mu in mnist_lloyd_kmeans.mus.values()])
-#plot_elements(mus_imgs, 5, 3)
-# generated_img = LloydKmeans.generate(mnist_lloyd_kmeans.mus['mu1'], mnist_lloyd_kmeans.mus['mu2'], 0.5)
-# generated_img = np.reshape(generated_img, (28, 28)) * 255.0
-# Image.fromarray(generated_img).show()
+"""
+mus_imgs = np.asarray([np.reshape(mu.representative.coordinate, (28, 28)) * 255.0 for mu in mnist_lloyd_kmeans.mus.values()])
+plot_elements(mus_imgs, 5, 3)
+generated_img = LloydKmeans.generate(mnist_lloyd_kmeans.mus['mu1'], mnist_lloyd_kmeans.mus['mu2'], 0.5)
+generated_img = np.reshape(generated_img, (28, 28)) * 255.0
+Image.fromarray(generated_img).show()
+"""
 
 
+"""
 # Kmeans on hand Dataset
-#dhi = load_sign_language_digits_ds('./../data/Sign-Language-Digits-Dataset-master', (28, 28))
-#dhi_train = np.reshape(dhi.astype('float32'), (-1, 784)) / 255.0
-#dhi_lloyd_kmeans = LloydKmeans(dhi_train, 15)
-#dhi_lloyd_kmeans.fit()
-#mus_imgs = np.asarray([np.reshape(mu.representative, (28, 28)) * 255.0 for mu in dhi_lloyd_kmeans.mus.values()])
-#plot_elements(mus_imgs, 5, 3)
-# generated_img = LloydKmeans.generate(dhi_lloyd_kmeans.mus['mu1'], dhi_lloyd_kmeans.mus['mu2'], 0.5)
-# generated_img = np.reshape(generated_img, (28, 28)) * 255.0
+dhi = load_sign_language_digits_ds('./../data/Sign-Language-Digits-Dataset-master', (28, 28))
+dhi_train = np.reshape(dhi.astype('float32'), (-1, 784)) / 255.0
+dhi_lloyd_kmeans = LloydKmeans(dhi_train, 15)
+dhi_lloyd_kmeans.fit()
+mus_imgs = np.asarray([np.reshape(mu.representative, (28, 28)) * 255.0 for mu in dhi_lloyd_kmeans.mus.values()])
+plot_elements(mus_imgs, 5, 3)
+generated_img = LloydKmeans.generate(dhi_lloyd_kmeans.mus['mu1'], dhi_lloyd_kmeans.mus['mu2'], 0.5)
+generated_img = np.reshape(generated_img, (28, 28)) * 255.0
+"""
