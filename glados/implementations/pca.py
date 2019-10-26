@@ -3,13 +3,10 @@
 
 
 """
-Multiple implementations of the PCA algorithm
-TODO: Implement a generate fot the PCA
+Implementations of the PCA algorithm
 """
 
-
 import numpy as np
-
 
 def _calculate_covariance_matrix(v1: np.ndarray, v2: np.ndarray) -> np.ndarray:
     """
@@ -19,9 +16,6 @@ def _calculate_covariance_matrix(v1: np.ndarray, v2: np.ndarray) -> np.ndarray:
     :return: The resultant covariance matrix
     """
     return (1 / (len(v1) - 1)) * sum(((v1[i] - np.mean(v1)) * (v2[i] - np.mean(v2)) for i in range(len(v1))))
-
-
-# covariance_matrix = np.vectorize(lambda d: np.asarray([[_calculate_covariance_matrix(x, y) for x in d] for y in d]))
 
 
 class PCA:
@@ -44,8 +38,6 @@ class PCA:
         Fit the Data to with the PCA algorithm with the parameters given with the PCA constructor
         """
         self.centered_data = self.data - np.mean(self.data.T, axis=1)
-        # self.cov_matrix = np.asarray([[_calculate_covariance_matrix(x, y)
-        #                              for x in self.centered_data] for y in self.centered_data])
         self.cov_matrix = np.matmul(self.centered_data.T, self.centered_data)
         eigen_val, self.eigen_vec['vanilla'] = np.linalg.eigh(self.cov_matrix)
         order = (-eigen_val).argsort()
