@@ -29,7 +29,6 @@ class Kmeans:
     def __init__(self, data: np.ndarray, labels: np.ndarray, nb_clusters: int, random_mus=False):
         """
         Kmeans Initializers
-        TODO: Allow random initialization of mus
         :param data: The Array to compute the K-Means on
         :param nb_clusters: The number of cluster find
         """
