@@ -37,8 +37,6 @@ def plot_elements(data: np.ndarray, columns=10, rows=10) -> None:
     :param data: The data to use to generate the images
     :return: A numpy array containing all the generated images
     """
-    print('PLOTTING')
-    # width, height = data.shape[1], data.shape[2]
     plt.figure(figsize=(10, 10))
     for i in range(columns * rows):
         plt.subplot(rows, columns, i + 1)
